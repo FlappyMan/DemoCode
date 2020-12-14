@@ -88,13 +88,14 @@ int main()
         perror("epoll_ctl: listenfd fail");
         exit(EXIT_FAILURE);
     }
- 
+ fetch_events:
     for (;;) {
         int nfds = epoll_wait(epollfd, events, MAX_EVENTS, -1);
         if (-1 == nfds) {
             perror("epoll_wait fail");
             exit(EXIT_FAILURE);
         }
+        send_events:
         for (int n = 0; n < nfds; ++n) {
             if (events[n].data.fd == listenfd) {
                 int connfd = accept(listenfd, NULL, NULL);

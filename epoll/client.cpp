@@ -34,7 +34,7 @@ int main()
     if (len > 0) {
         printf("write len=%d\n", len);
     }
-    //sleep(10);
+    sleep(10);
 
     //第二次write
     const char* buf1 = "hello";
@@ -42,7 +42,7 @@ int main()
     if (len > 0) {
         printf("write len1=%d\n", len);
     }
-    //sleep(10);
+    sleep(10);
 
     //第三次write
     const char* buf2 = "world";
