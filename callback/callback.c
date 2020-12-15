@@ -3,24 +3,39 @@
 #include<stdlib.h>
 #include<string.h>
 
-int (*proc)(int ,char);
-void getAge(int age,char* name)
+#if 0
+typedef int (*proc)(int ,char*);
+int* getAge(int age,char* name)
 {
     age = 29;
     memcpy(name,"zhangsan",20);
     printf("%d %s\n",age,name);
 }
 
-int getMaxAge(void (*proc)(int ,char*),char *name,int flag)
+int getMaxAge(proc pro,char *name,int flag)
+{
+    printf("%s\n",name);
+    pro(flag,name);
+    return 0;
+}
+#else
+int* getAge(int age,char* name)
+{
+    age = 29;
+    memcpy(name,"zhangsan",20);
+    printf("%d %s\n",age,name);
+}
+
+int getMaxAge(int (*proc)(int ,char*),char *name,int flag)
 {
     printf("%s\n",name);
     (*proc)(flag ,name);
     return 0;
 }
-
+#endif
 int main()
 {
     char name[100] = "lisi";
-    getMaxAge(getAge,name,1);
+    int age = getMaxAge(getAge,name,1);
     return 0;
 }
