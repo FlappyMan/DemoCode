@@ -66,6 +66,7 @@ int main()
         exit(EXIT_FAILURE);
     }
     res = listen(listenfd, 100);
+    printf("listenfd = %d\n",listenfd);
     if (0 == res)
         printf("server listen success\n");
     else {

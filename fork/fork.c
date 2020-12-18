@@ -36,7 +36,7 @@ int main(void)
 
     char tmp[] = "hello world";
     
-    for(i = 0;i<2;i++)
+    //for(i = 0;i<2;i++)
     {
         pid = fork();
         if(pid==0)
