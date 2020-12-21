@@ -1,10 +1,6 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<stdlib.h>
-int main(void)
-{
-    int i;
-    pid_t pid;
 
     //APUE详解
 
@@ -12,7 +8,7 @@ int main(void)
     /*  tip1
     **将子进程ID返回给父进程的理由：因为一个进程可以有多个子进程，并且没有一个函数可以获得其所有子进程的进程ID
     **fork使子进程得到返回0的理由是：一个进程只会有一个父进程，所以子进程总是可以
-    **调用geppid获得其父进程的ID（进程ID为0总是由内核交换进程使用，所以一个子进程
+    **调用getpid获得其父进程的ID（进程ID为0总是由内核交换进程使用，所以一个子进程
     **的进程ID不可能为0）
     */
 
@@ -34,17 +30,25 @@ int main(void)
     **通信。
     */
 
+int main(void)
+{
+    int i;
+    pid_t pid;
+
+
     char tmp[] = "hello world";
+    printf("tmp_ %s\n",tmp);
     
-    //for(i = 0;i<2;i++)
+    for(i = 0;i<3;i++)
     {
         pid = fork();
         if(pid==0)
         {
             printf("son %d\n",getpid());
             tmp[2] = '6';
+            //sleep(2);
         }else if(pid>0){
-            printf("parent %d %d %d\n",pid,getppid(),getpid());
+            printf("parent %d %d\n",pid,getpid());
             tmp[2] = '7';
         }
     }
@@ -52,3 +56,38 @@ int main(void)
 
     return 0;
 }
+
+
+// #include<stdio.h>
+// #include<stdlib.h>
+// #include<unistd.h>
+
+// int main()
+// {
+//     int i;
+//     pid_t pid;
+//     printf("xxxxxxxx\n");
+    
+//     for(i = 0; i < 5; i++)
+//     {
+//         pid = fork();
+//         if(pid == 0)
+//         {
+//             break;
+//         }
+//     }
+
+//     if(i < 5)
+//     {
+//         sleep(i);
+//         printf("I'm %d child,pid = %u\n",i+1,getpid());
+
+//     }
+//     else
+//     {
+//         sleep(i);
+//         printf("I'm parent\n");
+
+//     }
+//     return 0;
+// }

@@ -104,7 +104,7 @@ int main()
                     perror("accept fail");
                     continue;
                 }
-                setnonblocking(connfd);
+                //setnonblocking(connfd);
                 epoll_add(epollfd, connfd);
                 printf("connfd:%d\n", connfd);
             }
@@ -127,17 +127,17 @@ int main()
                     default:
                         epoll_del(epollfd, fd);
                         close(fd);
-                        printf("game over\n");
+                        printf("game over len<1\n");
                     }
                 }
                 else if (len == 0) {
                     epoll_del(epollfd, fd);
                     close(fd);
-                    printf("game over\n");
+                    printf("game over len==1\n");
                 }
-                ev.data.fd=fd;
-                ev.events=EPOLLIN|EPOLLET;
-                epoll_ctl(epollfd,EPOLL_CTL_MOD,fd,&ev);
+                // ev.data.fd=fd;
+                // ev.events=EPOLLIN|EPOLLET;
+                // epoll_ctl(epollfd,EPOLL_CTL_MOD,fd,&ev);
             }
             else {
                 // pass

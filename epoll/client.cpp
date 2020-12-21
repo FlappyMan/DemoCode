@@ -28,7 +28,7 @@ int main()
         exit(EXIT_FAILURE);
     }
     //第一次write
-    sleep(10);
+    sleep(2);
     const char* buf = "1234567890";
     int len = (int)write(sockfd, buf, strlen(buf));
     if (len > 0) {
@@ -36,19 +36,19 @@ int main()
     }
     sleep(10);
 
-    //第二次write
-    const char* buf1 = "hello";
-    len = (int)write(sockfd, buf1, strlen(buf1));
-    if (len > 0) {
-        printf("write len1=%d\n", len);
-    }
-    sleep(10);
+    // //第二次write
+    // const char* buf1 = "hello";
+    // len = (int)write(sockfd, buf1, strlen(buf1));
+    // if (len > 0) {
+    //     printf("write len1=%d\n", len);
+    // }
+    // sleep(10);
 
-    //第三次write
-    const char* buf2 = "world";
-    len = (int)write(sockfd, buf2, strlen(buf2));
-    if (len > 0) {
-        printf("write len2=%d\n", len);
-    }
+    // //第三次write
+    // const char* buf2 = "world";
+    // len = (int)write(sockfd, buf2, strlen(buf2));
+    // if (len > 0) {
+    //     printf("write len2=%d\n", len);
+    // }
 
 }  
