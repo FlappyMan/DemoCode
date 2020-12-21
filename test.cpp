@@ -13,8 +13,8 @@ int main(int argc,char* argv[])
 	printf("l+1 = %u\n",l);
 	int a = -2;
 	printf("n = %u\n",a);
-	unsigned long l1 = ~0UL;
+	unsigned long l1 = 3UL;
 	unsigned long l2 = 2;
-	printf("%d %d\n",l2-l1,l2+(~l1+1));
+	printf("%u %d\n",l2-l1,l2+(~l1+1));
 	return 0;
 }
