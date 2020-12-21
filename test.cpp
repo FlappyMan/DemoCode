@@ -8,13 +8,13 @@ int main(int argc,char* argv[])
 		printf("%d %d %d ",i,j,k);
 
 	unsigned long l=~0UL;
-	printf("%u\n",l);
+	printf("%lu\n",l);
 	l+=1;
-	printf("l+1 = %u\n",l);
+	printf("l+1 = %lu\n",l);
 	int a = -2;
-	printf("n = %u\n",a);
-	unsigned long l1 = 3UL;
+	printf("n = %d\n",a);
+	unsigned long l1 = ~0UL;
 	unsigned long l2 = 2;
-	printf("%u %d\n",l2-l1,l2+(~l1+1));
+	printf("%lu %lu\n",l2-l1,l2+(~l1+1));
 	return 0;
 }
