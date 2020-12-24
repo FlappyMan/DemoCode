@@ -9,9 +9,9 @@ class singleton
             return single;       
         }
     private:
-        static singleton* m_singleton;
+        // static singleton* m_singleton;
         singleton(){cout<<"constructor"<<endl;};
-        singleton(singleton*){};
+        // singleton(singleton*){};
 };
 int main()
 {

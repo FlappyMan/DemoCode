@@ -74,9 +74,9 @@ int main() {
         SmartPointer<int> sp2(sp); //sp=2 sp2=2
         SmartPointer<int> sp3(new int(20)); //sp3=1
         sp2 = sp3;//sp2=2 sp3=2
-        std::cout << sp.use_count() << std::endl;
-        std::cout << sp2.use_count() << std::endl;
-        std::cout << sp3.use_count() << std::endl;
+        std::cout << sp.use_count() << std::endl;//1
+        std::cout << sp2.use_count() << std::endl;//2
+        std::cout << sp3.use_count() << std::endl;//2
     }
     //delete operator
 }

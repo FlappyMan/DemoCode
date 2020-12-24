@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<linux/include/linux/kfifo.h>
+#include<kfifo.h>
  
 #define BUFF_SIZE 256
  

@@ -3,6 +3,8 @@
         "cstring": "c",
         "__string": "c",
         "memory": "c",
-        "utility": "c"
+        "utility": "c",
+        "string": "cpp",
+        "iosfwd": "cpp"
     }
 }
