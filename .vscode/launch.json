@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/removeSpace/demo",
+            "program": "${workspaceFolder}/epoll/server",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

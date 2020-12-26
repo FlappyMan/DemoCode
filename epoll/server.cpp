@@ -99,19 +99,22 @@ int main()
         send_events:
         for (int n = 0; n < nfds; ++n) {
             if (events[n].data.fd == listenfd) {
-                int connfd = accept(listenfd, NULL, NULL);
+                struct sockaddr_in sa;
+                int size;
+                int connfd = accept(listenfd, (sockaddr*)&sa, (socklen_t*)&size);
                 if (-1 == connfd) {
                     perror("accept fail");
                     continue;
                 }
+                printf("client addr = %s %d\n",inet_ntoa(sa.sin_addr),ntohs(sa.sin_port));
                 //setnonblocking(connfd);
                 epoll_add(epollfd, connfd);
                 printf("connfd:%d\n", connfd);
             }
             else if (events[n].events & EPOLLIN) {
-                char buf[2] = {0};
+                char buf[128] = {0};
                 int fd = events[n].data.fd;
-                size_t count = 2;
+                size_t count = 128;
                 int len = (int)read(fd, buf, count);
                 if (len > 0) {
                     printf("read len=%d buf=%s\n", len, buf);
@@ -133,7 +136,7 @@ int main()
                 else if (len == 0) {
                     epoll_del(epollfd, fd);
                     close(fd);
-                    printf("game over len==1\n");
+                    //printf("game over len==0\n");
                 }
                 // ev.data.fd=fd;
                 // ev.events=EPOLLIN|EPOLLET;

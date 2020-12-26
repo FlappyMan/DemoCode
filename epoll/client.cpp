@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
+#include <string>
   
 #define MAX_EVENTS 10  
  
@@ -16,23 +17,27 @@
 int main()  
 {  
     // socket
-    struct sockaddr_in servaddr;  
-    short port = 9527;  
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);  
-    servaddr.sin_family = AF_INET;  
-    servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");  
-    servaddr.sin_port = htons(port);
- 
-    if (connect(sockfd, (sockaddr *) &servaddr, sizeof(sockaddr_in)) < 0) {
-        perror("connect fail");
-        exit(EXIT_FAILURE);
-    }
-    //第一次write
-    sleep(2);
-    const char* buf = "1234567890";
-    int len = (int)write(sockfd, buf, strlen(buf));
-    if (len > 0) {
-        printf("write len=%d\n", len);
+        int n = 1000;
+    while(n)    
+    {
+        struct sockaddr_in servaddr;  
+        short port = 9527;  
+        int sockfd = socket(AF_INET, SOCK_STREAM, 0);  
+        servaddr.sin_family = AF_INET;  
+        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");  
+        servaddr.sin_port = htons(port);
+
+        if (connect(sockfd, (sockaddr *) &servaddr, sizeof(sockaddr_in)) < 0) {
+            perror("connect fail");
+            exit(EXIT_FAILURE);
+        }
+        //第一次write
+        std::string buf = std::to_string(n);
+        int len = (int)write(sockfd, (const char*)buf.data(), buf.size());
+        if (len > 0) {
+            printf("write len=%d\n", len);
+        }
+        n--;
     }
     sleep(10);
 
