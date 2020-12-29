@@ -4,8 +4,9 @@
 #include<string.h>
 #include<sys/select.h>
 
-#if 0
+#if 1
 typedef int (*proc)(int ,char*);
+typedef void (*proc1)(int ,char*);
 int* getAge(int age,char* name)
 {
     age = 29;
@@ -33,6 +34,8 @@ int getMaxAge(int (*proc)(int ,char*),char *name,int flag)
     (*proc)(flag ,name);
     return 0;
 }
+
+
 #endif
 #define BITS_PER_LONG 32
 

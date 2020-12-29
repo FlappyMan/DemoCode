@@ -107,7 +107,7 @@ int main()
                     continue;
                 }
                 printf("client addr = %s %d\n",inet_ntoa(sa.sin_addr),ntohs(sa.sin_port));
-                //setnonblocking(connfd);
+                setnonblocking(connfd);
                 epoll_add(epollfd, connfd);
                 printf("connfd:%d\n", connfd);
             }

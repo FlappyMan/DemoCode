@@ -1,12 +1,12 @@
 CC=gcc
-CFLAGS=-Wall -O2 -g
+CFLAGS=-Wall -o3
 TARGET=demo
 SRCS :=$(wildcard *.c)
 OBJS :=$(patsubst %c,%o,$(SRCS))
 all:$(TARGET)
 $(TARGET):$(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
-%.o:%.c
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $<
 clean:
 	rm -f *.o $(TARGET)

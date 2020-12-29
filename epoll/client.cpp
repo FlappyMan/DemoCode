@@ -17,9 +17,10 @@
 int main()  
 {  
     // socket
-        int n = 1000;
+    int n = 1000;
     while(n)    
     {
+        int fd;
         struct sockaddr_in servaddr;  
         short port = 9527;  
         int sockfd = socket(AF_INET, SOCK_STREAM, 0);  
@@ -27,7 +28,7 @@ int main()
         servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");  
         servaddr.sin_port = htons(port);
 
-        if (connect(sockfd, (sockaddr *) &servaddr, sizeof(sockaddr_in)) < 0) {
+        if (fd=connect(sockfd, (sockaddr *) &servaddr, sizeof(sockaddr_in)) < 0) {
             perror("connect fail");
             exit(EXIT_FAILURE);
         }
@@ -38,8 +39,9 @@ int main()
             printf("write len=%d\n", len);
         }
         n--;
+        close(fd);
     }
-    sleep(10);
+    //sleep(10);
 
     // //第二次write
     // const char* buf1 = "hello";
@@ -55,5 +57,6 @@ int main()
     // if (len > 0) {
     //     printf("write len2=%d\n", len);
     // }
+    return 0;
 
 }  

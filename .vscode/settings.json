@@ -65,6 +65,7 @@
         "__threading_support": "cpp",
         "__tuple": "cpp",
         "ios": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "__functional_base_03": "c"
     }
 }
