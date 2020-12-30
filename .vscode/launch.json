@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/epoll/server",
+            "program": "${workspaceFolder}/struct/demo",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

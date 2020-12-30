@@ -4,15 +4,32 @@
 #include<sys/epoll.h>
 #include<limits.h>
 
+
 struct list_head {
 	struct list_head *next, *prev;
+};
+
+struct epitem {
+
+	/* List header used to link this structure to the eventpoll ready list */
+	struct list_head rdllink;
+    char data;
+
+};
+
+struct test{
+    char c;
+    int b;
+    struct list_head head;
 };
 
 typedef struct list_node
 {
     int ivar;
-    char cvar;
-    double dvar;
+    int iCnt;
+    int i;
+    int m;
+    int n;
     struct list_head rdllist;
 }list_node;
 
@@ -31,13 +48,6 @@ const typeof( ((type *)0)->member ) *__mptr = (ptr); \
 #define list_entry(ptr, type, member) \
 	container_of(ptr, type, member)
 
-
-struct epitem {
-    int data;
-	/* List header used to link this structure to the eventpoll ready list */
-	struct list_head rdllink;
-
-};
 /**
  * list_for_each_entry_safe - iterate over list of given type safe against removal of list entry
  * @pos:	the type * to use as a loop cursor.
@@ -90,27 +100,40 @@ int main(void)
     list_node* l1 = container_of(&l,typeof(list_node),rdllist);
     printf("%x %x\n",&l,l1);
 
-    list_node* l2 = container_of(&l,typeof(list_node),rdllist);
-    printf("%x %x\n",&l,l2);
+    struct epitem it;
+    struct epitem* item = container_of(&it,typeof(struct epitem),rdllink);
+    printf("%x %x\n",&l,item);
+
+    size_t off = offsetof(struct list_node,rdllist);
+    printf("member_off : %d struct size : %d size : %d\n",
+    off,sizeof(struct list_node),sizeof(l.rdllist));
+
+    off = offsetof(struct epitem,rdllink);
+    printf("member_off : %d struct size : %d size : %d\n",
+    off,sizeof(struct epitem),sizeof(it.rdllink));
 
     printf("%d\n",EP_MAX_EVENTS);
+
+    off = offsetof(struct test,head);
+    printf("empty struct : %d off=%d\n",sizeof(struct test),off);
+    printf("unsigned long %d %d\n",sizeof(unsigned long),sizeof(unsigned int));
 
 
     LIST_HEAD(txlist);
     
     struct epitem epi = {
-        .data = 1,
+        .data = 'a',
         .rdllink = LIST_HEAD_INIT(epi.rdllink)
     };
 
     struct epitem epi2 = {
-        .data = 2,
-        .rdllink = LIST_HEAD_INIT(epi.rdllink)
+        .data = 'b',
+        .rdllink = LIST_HEAD_INIT(epi2.rdllink)
     };
 
     struct epitem epi3 = {
-        .data = 3,
-        .rdllink = LIST_HEAD_INIT(epi.rdllink)
+        .data = 'c',
+        .rdllink = LIST_HEAD_INIT(epi3.rdllink)
     };
 
     list_add(&epi.rdllink,&txlist);
@@ -120,10 +143,21 @@ int main(void)
     struct epitem *_epi;
     struct epitem *tmp;
     struct list_head *head = &txlist;
+
+    typeof(((struct list_node*)0)->rdllist)* _mptr = head;
+
+    printf("%d\n",sizeof(int));
+    printf("%d\n",sizeof(struct list_head));
+
+    printf("txlist head  : cur %p next %p prev %p\n",&txlist,txlist.next,txlist.prev);
+    printf("epi3   list  : cur %p next %p prev %p\n",&epi3.rdllink,(&epi3.rdllink)->next,(&epi3.rdllink)->prev);
+    printf("epi2   list  : cur %p next %p prev %p\n",&epi2.rdllink,(&epi2.rdllink)->next,(&epi2.rdllink)->prev);
+    printf("epi    list  : cur %p next %p prev %p\n",&epi.rdllink,(&epi.rdllink)->next,(&epi.rdllink)->prev);
+
     list_for_each_entry_safe(_epi, tmp, head, rdllink)
     {
         printf("_epi->data = %d\n",_epi->data);
     }
-
+    system("pause");
     return 0;
 }

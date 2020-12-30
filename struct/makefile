@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -O2 -g
+CFLAGS=-Wall -O3 -g
 TARGET=demo
 SRCS :=$(wildcard *.c)
 OBJS :=$(patsubst %c,%o,$(SRCS))
