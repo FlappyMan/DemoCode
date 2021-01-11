@@ -128,12 +128,12 @@ int main(void)
 
     struct epitem epi2 = {
         .data = 'b',
-        .rdllink = LIST_HEAD_INIT(epi2.rdllink)
+        .rdllink = LIST_HEAD_INIT(epi.rdllink)
     };
 
     struct epitem epi3 = {
         .data = 'c',
-        .rdllink = LIST_HEAD_INIT(epi3.rdllink)
+        .rdllink = LIST_HEAD_INIT(epi.rdllink)
     };
 
     list_add(&epi.rdllink,&txlist);

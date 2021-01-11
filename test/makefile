@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Wall -O2
+CFLAGS=-Wall -O2 -g
 TARGET=test
 SRCS :=$(wildcard *.cpp)
 OBJS :=$(patsubst %cpp,%o,$(SRCS))

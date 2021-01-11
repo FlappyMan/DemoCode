@@ -1,24 +1,27 @@
-#include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
-#include <unistd.h>
-int fun(int a,int b)
+#include<iostream>
+
+#define F(x) ((x)*(x)+3)
+int findNum(float fx,int left,int right)
 {
-    return a*b;
+    int cnt = 1000;
+    while(100000)
+    {
+        if(F(i)-fx<-0.01||F(i)-fx>0.01) return i;
+        if(F(i)<=right)
+        {
+            left = (left+right)/2;
+        }else{
+            right = right+(left+right)/2;
+        }
+        findNum(fx,left,right);
+    }
 }
 
-#define MAX_MEM (1024*1024*1024*5)
-int main()
+int main(int argc,char*argv[])
 {
-    daemon(0,0);
-    int a =10;
-    int b =20;
-    printf("sum = %d\n",a+b);
-    int c;
-    int d;
-    scanf("%d",&c);
-    scanf("%d",&d);
-    printf("plus = %d\n",fun(c,d));
-    char* buf=new char[MAX_MEM];
+    float fx = 133.7;
+    int left=0,right=1001/2;
+    int ret = findNum(fx,left,right);
     return 0;
 }
+

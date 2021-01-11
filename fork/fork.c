@@ -23,6 +23,7 @@
     **副本。作为替代，使用了写时复制技术。这些区域又父进程和子进程共享，而且内核将他们
     **的权限改变为只读。如果父进程和子进程中的任一个试图修改这些区域，则内核只为修改区域
     **那块内存制作一个副本，通常是虚拟存储系统中的”一页“。
+    */
 
     /*  tip4
     **一般来说，在fork之后是父进程先执行还是子进程先执行是不确定的，这取决于内核
@@ -39,9 +40,11 @@ int main(void)
     char tmp[] = "hello world";
     printf("tmp_ %s\n",tmp);
     
-    for(i = 0;i<3;i++)
+    for(i = 0;i<1;i++)
     {
+        printf("123\n");
         pid = fork();
+        printf("234\n");
         if(pid==0)
         {
             printf("son %d\n",getpid());
@@ -52,6 +55,7 @@ int main(void)
             tmp[2] = '7';
         }
     }
+    while(1){sleep(10);}
     printf("tmp %s\n",tmp);
 
     return 0;
