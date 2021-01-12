@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #define max(a,b) ((a)>(b)?(a):(b))
 char * findLongestWord(char * s, char ** d, int dSize){
     if(!d||!s||dSize<=0) return "";
@@ -34,6 +35,20 @@ char * findLongestWord(char * s, char ** d, int dSize){
     }
     return dst==NULL?"":dst;
 }
+struct ListNode {
+     int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+struct Node{
+    int val;   // 当前节点的值
+    int min;   // 当前以此节点为栈顶的栈内最小元素的值
+    Node *next;   // 下一个节点
+
+    Node(int x, int y) : val(x), min(y), next(nullptr) {}
+};
 void test()
 {
     char str1[2][10] = {"hello","world"};
@@ -74,5 +89,6 @@ int main()
     //     printf("%d dst: %s\n",i,dst[i]);
     // }
     //test();
+    struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
     return 0;
 }
