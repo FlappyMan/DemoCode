@@ -144,6 +144,11 @@ struct List_head* reverseBetween(struct List_head* head, int m, int n) {
     }
     return h->next;
 }
+void list_insert_head(struct List_head** head,struct List_head* entry)
+{
+    entry->next = *head;
+    *head = entry;
+}
 int main()
 {
     // cout<<myAtoi("   -h123hhs12345h123")<<endl;
@@ -166,6 +171,8 @@ int main()
 
     struct List_head* head = create_tail(5);
     reverseBetween(head,2,4);
+    struct List_head* node = new struct List_head(8);
+    //list_insert_head(&head,node);
     while (head)
     {
         cout<<"val:"<<head->val<<endl;

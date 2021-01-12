@@ -1,0 +1,11 @@
+break bianry.cpp:15
+break bianry.cpp:49
+break bianry.cpp:111
+break demo.cpp:8
+break demo.cpp:131
+break demo.cpp:173
+break digui.cpp:27
+break strFind.c:42
+break struct.c:161
+
+set exec-wrapper The wrapper for running programs is \
