@@ -8,8 +8,7 @@ private:
     T* _ptr;
     size_t* _count;
 public:
-    SmartPointer(T* ptr = nullptr) :
-            _ptr(ptr) {
+    SmartPointer(T* ptr = nullptr) :_ptr(ptr) {
         if (_ptr) {
             _count = new size_t(1);
         } else {

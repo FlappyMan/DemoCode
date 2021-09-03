@@ -221,14 +221,35 @@ ostream& operator<<(ostream& os,String& str)
     return os;
 }
 
+class demo
+{
+public:
+	demo():m_str("hello wolrd") {}
+	string getStr()
+	{
+		return m_str;
+	}
+private:
+	string m_str;
+};
+
+void fun(char*& p)
+{
+    demo d;
+	p = &d.getStr()[0];
+}
+
 int main()
 {
-    String str("how are you");
-    String str1(str);
-    String str2(str1);
-    cout<<str2<<endl;
+    // String str("how are you");
+    // String str1(str);
+    // String str2(str1);
+    // cout<<str2<<endl;
 
-    str2 += str1;
-    cout<<str2<<endl;
+    // str2 += str1;
+    // cout<<str2<<endl;
+    char *p = NULL;
+	fun(p);
+	printf("%s \n",p);
     return 0;
 }
