@@ -239,15 +239,72 @@ void fun(char*& p)
 	p = &d.getStr()[0];
 }
 
+void *mymemcpy(void *__dest, __const void *__src, size_t __n)
+{
+	int i = 0;
+	unsigned char *d = (unsigned char *)__dest, *s = (unsigned char *)__src;
+
+	for (i = __n >> 3; i > 0; i--) {
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+	}
+
+	if (__n & 1 << 2) {
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+		*d++ = *s++;
+	}
+
+	if (__n & 1 << 1) {
+		*d++ = *s++;
+		*d++ = *s++;
+	}
+
+	if (__n & 1)
+		*d++ = *s++;
+
+	return __dest;
+}
+
+char *mystrstr(const char *s1, const char *s2)
+{
+    size_t l1,l2;
+    l2 = strlen(s2);
+    if(!l2)
+        return (char *)s1;
+    l1 = strlen(l1);
+    while (l1>=l2)
+    {
+        l1--;
+        if(!memcmp(s1,s2,l1))
+            return (char *)s1;
+        s1++;
+    }
+    return NULL;
+    
+}
+
 int main()
 {
-    // String str("how are you");
-    // String str1(str);
-    // String str2(str1);
-    // cout<<str2<<endl;
+    String str("how are you");
+    String str1(str);
+    String str2(str1);
+    //cout<<str2<<endl;
+    //str2 += str1;
+    //cout<<str2<<endl;
 
-    // str2 += str1;
-    // cout<<str2<<endl;
+    char *s1 = "hello";
+    char *s2 = "ll";
+    char *ret = mystrstr(s1, s2);
+    cout<<ret<<endl;
+
     char *p = NULL;
 	fun(p);
 	printf("%s \n",p);
